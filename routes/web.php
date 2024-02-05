@@ -15,5 +15,6 @@ use App\Http\Controllers\CategoriesController;
 |
 */
 
-Route::get('/categories', [CategoriesController::class, 'index']);
-Route::get('/categories/{id}', [CategoriesController::class, 'show']);
+
+
+
