@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -21,4 +22,16 @@ Route::get('/categories/{id}', [CategoriesController::class, 'show']);
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'productsById']);
+
+
+
+Route::post('/register', [AuthController::class,'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+
 

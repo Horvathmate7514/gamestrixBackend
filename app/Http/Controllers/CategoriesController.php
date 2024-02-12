@@ -20,8 +20,8 @@ class CategoriesController extends Controller
 
     public function show($id)
     {
-        // $categories = Category::where('CategoryID','=',$id)->get();
-        $categories = Category::with('category')->find($id);
+        $categories = Category::where('CategoryID','=',$id)->get();
+        // $categories = Category::with('category')->find($id);
         if ($categories == null)
             return response()->json(['message' => 'No item found.'], 404);
 
