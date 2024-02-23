@@ -47,13 +47,12 @@ class ProductController extends Controller
     public function show($id)
     {
         $productsByCategories = Product::where('CategoryID','=',$id)->get();
-        // $book = Category::with('category')->find($id);
+
         if ($productsByCategories == null)
             return response()->json(['message' => 'No item found.'], 404);
 
         return response()->json($productsByCategories);
-        // return BookResource::make($book);
-        // return response()->json($book);
+        
     }
 
     /**
