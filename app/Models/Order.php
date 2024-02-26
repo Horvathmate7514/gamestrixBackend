@@ -23,7 +23,7 @@ class Order extends Model
 
     public function products(): BelongsToMany{
         return $this->belongsToMany(Product::class, 'order_details', 'OrderNumber', 'ProductNumber')
-        ->withPivot('Quantity', 'UnitPrice');
+        ->withPivot('QuantityOrdered', 'QuotedPrice');
     }
 }
 

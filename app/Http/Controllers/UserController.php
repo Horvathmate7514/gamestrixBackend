@@ -14,8 +14,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $userStuffs = Order::with('products')->where('CustomerID', '=', Auth::id())->get();
+
+        $userStuffs = Order::where('CustomerID', '=', Auth::id())->get();
         return response()->json($userStuffs, 200);
+
+        // $userStuffs = Order::with('products')->where('CustomerID', '=', Auth::id())->get();
+        // return response()->json($userStuffs, 200);
 
         // if ($userStuffs == null) {
         //     return response()->json(['message' => 'User not found'], 404);

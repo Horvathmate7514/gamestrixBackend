@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderDetailsController extends Controller
 {
@@ -12,7 +14,12 @@ class OrderDetailsController extends Controller
      */
     public function index()
     {
-        //
+        $order = Order::where('CustomerID', Auth::id())->get();
+        foreach ($order as $o) {
+            $details[] = OrderDetails::where('OrderNumber', $o['OrderNumber'])->get();
+        }
+        return response()->json($details, 200);
+
     }
 
     /**
