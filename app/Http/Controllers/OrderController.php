@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
@@ -22,9 +23,9 @@ class OrderController extends Controller
      */
     public function makeOrder(Request $request)
     {
-        $order = Order::create([
-            'OrderNumber' => Order::all()->count() + 1,
-            'OrderDate' => now(),
+        $order = OrderDetails::create([
+            'OrderNumber' => OrderDetails::all()->count() + 1,
+            'ProductNumber ' => now(),
             'ShipDate' => now()->addDays(7),
             'CustomerID' => Auth::id(),
         ]);
