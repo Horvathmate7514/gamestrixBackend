@@ -33,11 +33,12 @@ Route::post('/login', [AuthController::class, 'login']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/getAllUser', [UserController::class, 'getAllUser']);
+    Route::get('/usersstuff', [UserController::class, 'index']);
+    Route::post('updateProfile', [UserController::class, 'updateProfile']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/orders', [OrderController::class,'makeOrder']);
-    Route::get('/usersstuff', [UserController::class, 'index']);
     Route::get('/orderedDetails', [OrderDetailsController::class, 'index']);
-    Route::get('/getAllUser', [UserController::class, 'getAllUser']);
 
 
 
