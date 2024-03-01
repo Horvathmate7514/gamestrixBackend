@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class OrderDetails extends Pivot
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $table = 'order_details';
 
     protected $primaryKey = ['OrderNumber', 'ProductNumber'];

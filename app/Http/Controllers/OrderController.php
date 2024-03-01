@@ -23,12 +23,24 @@ class OrderController extends Controller
      */
     public function makeOrder(Request $request)
     {
-        $order = OrderDetails::create([
-            'OrderNumber' => OrderDetails::all()->count() + 1,
-            'ProductNumber ' => now(),
+        $order = Order::create([
+            'OrderDate' => now(),
             'ShipDate' => now()->addDays(7),
             'CustomerID' => Auth::id(),
         ]);
+
+        // return $request->all();
+
+        foreach ($request->all() as $product) {
+
+            OrderDetails::create([
+                'OrderNumber' => $order->OrderNumber,
+                'ProductNumber' => $product["ProductNumber"],
+                'QuantityOrdered' => $product["QuantityOrdered"],
+                'QuotedPrice' => $product["QuotedPrice"],
+            ]);
+        }
+
         return response()->json($order, 201);
     }
 
