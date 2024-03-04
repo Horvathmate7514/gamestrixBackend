@@ -31,7 +31,7 @@ class User extends Authenticatable
         'role'
     ];
 
-    public $timestamps = false;
+    // public $timestamps = false;
 
 
     /**
