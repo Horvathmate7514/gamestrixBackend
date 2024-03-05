@@ -76,11 +76,14 @@ class AuthController extends Controller
 
         $tokenUser = (PasswordResetToken::where('email', $user->email)->first());
 
-        if ($tokenUser)
-        {
-            $time = strtotime($tokenUser->created_at);
-            $expired =  new Date //ezt kell megoldani, hogy a token lejárjon;
-            return  $tokenUser;
+        if ($tokenUser){
+            $expired = Date("Y-m-d H:i", strtotime("15 minutes", strtotime($tokenUser->created_at))); /// 15 perces reset token !!!
+            $time = Date("Y-m-d H:i", strtotime("60 minutes", strtotime(now())));
+
+            if ($time < $expired){
+                return response()->json(["error" => true, "message" => "Email already sent."], 404);
+            }
+            PasswordResetToken::where('email', $user->email)->delete();
         }
 
 
