@@ -5,9 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
+/**
+ * @SWG\Get(
+ *     path="/categories",
+ *     summary="Get a list of users",
+ *     tags={"Category"},
+ *     @SWG\Response(response=200, description="Successful operation"),
+ *     @SWG\Response(response=400, description="Invalid request"),
+ * )
 
+ */
 class CategoriesController extends Controller
 {
+    /**
+ * @OA\Info(title="My First API", version="0.1")
+ * @OA\Get(
+ *     path="/api/categories",
+ *     @OA\Response(response="200", description="Display a listing of projects.")
+ * )
+ */
     public function index()
     {
         $categories = Category::all();
