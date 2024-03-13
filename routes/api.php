@@ -25,6 +25,7 @@ Route::get('/categories/{id}', [CategoriesController::class, 'show']);
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'productsById']);
+Route::get('/product/{id}', [ProductController::class, 'productsSingleOne']);
 
 
 

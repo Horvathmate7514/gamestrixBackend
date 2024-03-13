@@ -32,6 +32,12 @@ class ProductController extends Controller
             return response()->json($categories->products,200);
 
 }
+protected function productsSingleOne($id){
+    $categories = Product::find($id);
+    return response()->json($categories->products,200);
+
+
+}
 
     /**
      * Store a newly created resource in storage.
