@@ -33,9 +33,15 @@ class ProductController extends Controller
 
 }
 protected function productsSingleOne($id){
-    $categories = Product::find($id);
-    return response()->json($categories->products,200);
+    $product = Product::where('ProductNumber', $id)->first();
 
+    if(!$product) {
+      return response()->json([
+        'message' => 'Product not found'
+      ], 404);
+    }
+
+    return response()->json($product);
 
 }
 
@@ -58,7 +64,7 @@ protected function productsSingleOne($id){
             return response()->json(['message' => 'No item found.'], 404);
 
         return response()->json($productsByCategories);
-        
+
     }
 
     /**
