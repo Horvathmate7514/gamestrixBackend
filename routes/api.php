@@ -29,6 +29,7 @@ Route::get('/product/{id}', [ProductController::class, 'productsSingleOne']);
 
 
 
+
 Route::post('/register', [AuthController::class,'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/forgotPassword', [AuthController::class, 'ResetPasswordToken']);
@@ -46,6 +47,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/orders', [OrderController::class,'makeOrder']);
 
     Route::get('/orderedDetails', [OrderDetailsController::class, 'index']);
+
+    Route::post('/makeProducts', [ProductController::class, 'store']);
+    Route::delete('/deleteProcts/{id}', [ProductController::class, 'destroy']);
 
 
 

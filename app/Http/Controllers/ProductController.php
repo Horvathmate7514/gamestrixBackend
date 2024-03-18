@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -50,7 +51,18 @@ protected function productsSingleOne($id){
      */
     public function store(Request $request)
     {
-
+        if (Auth::user()->role != 1) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+        $product = Product::create([
+            'ProductName' => $request->ProductName,
+            'ProductDescription' => $request->ProductDescription,
+            'RetailPrice' => $request->RetailPrice,
+            'QuantityOnHand' => $request->QuantityOnHand,
+            'CategoryID' => $request->CategoryID,
+            'Image' => $request->Image,
+        ]);
+        return response()->json($product, 201);
     }
 
     /**
@@ -78,8 +90,19 @@ protected function productsSingleOne($id){
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        if (Auth::user()->role != 1) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+        $deleteProduct = Product::where('ProductNumber','=', $id)->delete();
+
+        if (!$deleteProduct) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        return response()->json(['message' => 'Product deleted']);
+
+
     }
 }

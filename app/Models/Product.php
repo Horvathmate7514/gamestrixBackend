@@ -11,6 +11,10 @@ class Product extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+    protected $guarded = [];
+
+
    /**
     * Get the user that owns the Product
     *
