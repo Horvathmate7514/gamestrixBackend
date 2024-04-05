@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(10);
 
         return response()->json($products);
 
@@ -102,7 +102,7 @@ protected function productsSingleOne($id){
         }
 
         return response()->json(['message' => 'Product deleted']);
-
-
     }
+
+
 }
