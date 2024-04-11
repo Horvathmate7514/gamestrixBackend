@@ -44,8 +44,8 @@ class UserController extends Controller
         $orders = Order::with('products')->where('CustomerID', '=', Auth::id())->get();
         foreach ($orders as $order){
             $order->Total = $order->products->sum("pivot.QuotedPrice");
+            $order->save();
         }
-        $order->save();
         // return response()->json($orders->products->sum("pivot.QuotedPrice"), 200);
         return response()->json($orders, 200);
     }
