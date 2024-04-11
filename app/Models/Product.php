@@ -14,6 +14,9 @@ class Product extends Model
     public $timestamps = false;
     protected $guarded = [];
 
+    protected $primaryKey = 'ProductNumber';
+    protected $table = 'products';
+
 
    /**
     * Get the user that owns the Product
