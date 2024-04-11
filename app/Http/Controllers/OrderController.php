@@ -41,6 +41,7 @@ class OrderController extends Controller
             ]);
         }
 
+
         return response()->json($order, 201);
     }
 
@@ -68,4 +69,3 @@ class OrderController extends Controller
         //
     }
 }
-

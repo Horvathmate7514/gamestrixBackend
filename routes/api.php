@@ -24,6 +24,7 @@ Route::get('/categories', [CategoriesController::class, 'index']);
 Route::get('/categories/{id}', [CategoriesController::class, 'show']);
 
 Route::get('/products', [ProductController::class, 'index']);
+Route::get('/productsPaged', [ProductController::class, 'getProductsWithPage']);
 Route::get('/products/{id}', [ProductController::class, 'productsById']);
 Route::get('/product/{id}', [ProductController::class, 'productsSingleOne']);
 
@@ -40,7 +41,8 @@ Route::post('/resetPassword', [AuthController::class, 'ResetPassword']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getAllUser', [UserController::class, 'getAllUser']);
     Route::get('/usersstuff', [UserController::class, 'index']);
-    Route::post('updateProfile', [UserController::class, 'updateProfile']);
+    Route::post('/updateProfile', [UserController::class, 'updateProfile']);
+    Route::get('/OrdersByUser', [UserController::class, 'getOrdersByUser']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 
@@ -50,6 +52,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/makeProducts', [ProductController::class, 'store']);
     Route::delete('/deleteProcts/{id}', [ProductController::class, 'destroy']);
+
 
 
 

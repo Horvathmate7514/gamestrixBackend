@@ -20,7 +20,7 @@ class CategoryTest extends TestCase
         ]);
         $response = $this->getJson('/api/categories');
         $response->assertStatus(200);
-        //dd($response[0]);
+       // dd($response[0]);
         $response->assertJson([
             [
                 'CategoryName' => 'testcategory',

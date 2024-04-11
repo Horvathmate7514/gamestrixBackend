@@ -20,6 +20,14 @@ class ProductController extends Controller
 
     }
 
+    public function getProductsWithPage()
+    {
+        $products = Product::paginate(10);
+
+        return response()->json($products);
+
+    }
+
     protected function productsById($id){
         $categories = Category::find($id);
         // foreach ($products as $product){

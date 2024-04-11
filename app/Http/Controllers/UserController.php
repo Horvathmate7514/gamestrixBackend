@@ -40,6 +40,16 @@ class UserController extends Controller
         return response()->json($users, 200);
     }
 
+    public function getOrdersByUser(){
+        $orders = Order::with('products')->where('CustomerID', '=', Auth::id())->get();
+        foreach ($orders as $order){
+            $order->Total = $order->products->sum("pivot.QuotedPrice");
+        }
+        $order->save();
+        // return response()->json($orders->products->sum("pivot.QuotedPrice"), 200);
+        return response()->json($orders, 200);
+    }
+
     public function updateProfile(Request $request)
     {
 

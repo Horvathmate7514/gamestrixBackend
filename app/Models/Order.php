@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Order extends Model
 {
     use HasFactory;
-    protected $fillable = ['OrderNumber', 'OrderDate', 'ShipDate', 'CustomerID' ];
+    protected $fillable = ['OrderNumber', 'OrderDate', 'ShipDate', 'CustomerID', 'Total' ];
     public $timestamps = false;
 
     protected $primaryKey = 'OrderNumber';

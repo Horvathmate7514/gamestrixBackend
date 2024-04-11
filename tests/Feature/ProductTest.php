@@ -18,7 +18,7 @@ class ProductTest extends TestCase
         //     'CategoryName' => 'testcategory',
         //     'CategoryId' => 1
         // ]);
-        $categories =\App\Models\Category::factory()->create([
+        $categories = \App\Models\Category::factory()->create([
             'CategoryName' => 'testcategory',
             'CategoryId' => 1
         ]);
@@ -33,17 +33,23 @@ class ProductTest extends TestCase
         ]);
         $response = $this->getJson('/api/products');
         $response->assertStatus(200);
-        // dd($response[0]);
+         //dd($response[0]);
         $response->assertJson([
             [
+
                 'ProductNumber' => 1,
                 'ProductName' => 'testproduct',
                 'ProductDescription' => 'testproductdescription',
                 'RetailPrice' => 1000,
                 'QuantityOnHand' => 10,
-                'CategoryID' => 1,
-                'Image' => 'testimage.jpg',
+                'CategoryId' => 1,
+                'image' => 'testimage.jpg',
+
             ]
         ]);
+    }
+    public function test_try_get_products_with_invalid_root(): void{
+        $response = $this->getJson('/api/productss', []);
+        $response->assertStatus(404);
     }
 }
