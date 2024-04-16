@@ -31,7 +31,8 @@ class OrderController extends Controller
 
 
         ]);
-        $order->Total=0;
+         $order->Total=0;
+
         foreach ($request->all() as $product) {
 
             OrderDetails::create([
@@ -39,8 +40,11 @@ class OrderController extends Controller
                 'ProductNumber' => $product["ProductNumber"],
                 'QuantityOrdered' => $product["QuantityOrdered"],
                 'QuotedPrice' => $product["QuotedPrice"],
+                // $Total =>$product["QuantityOrdered"] * $product["QuotedPrice"],
             ]);
-            $order->Total += $product["QuotedPrice"];
+            $order->Total += $product["QuotedPrice"] * $product["QuantityOrdered"];
+
+
         }
         $order->save();
 
