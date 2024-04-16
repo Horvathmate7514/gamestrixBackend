@@ -5,6 +5,6 @@
 </head>
 <body>
     <p>{{ $text }}</p>
-    <p>https://vizsgaremek-2.vercel.app/jelszohelyreallitas/{{$resetLink}}</p>
+    <p>https://bgs.jedlik.eu/gamestrix/jelszohelyreallitas/{{$resetLink}}</p>
 </body>
 </html>

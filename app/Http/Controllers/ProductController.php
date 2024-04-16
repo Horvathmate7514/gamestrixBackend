@@ -17,7 +17,6 @@ class ProductController extends Controller
         $products = Product::all();
 
         return response()->json($products);
-
     }
 
     public function getProductsWithPage()
@@ -25,34 +24,25 @@ class ProductController extends Controller
         $products = Product::paginate(10);
 
         return response()->json($products);
-
     }
 
-    protected function productsById($id){
+    protected function productsById($id)
+    {
         $categories = Category::find($id);
-        // foreach ($products as $product){
-        //     $p[]= [
-        //         $name = $product->ProductName,
-        //         $description = $product->ProductDescription,
-        //         $price = $product->RetailPrice,
-        //         $img = $product->Image,
-
-        //     ];
-            return response()->json($categories->products,200);
-
-}
-protected function productsSingleOne($id){
-    $product = Product::where('ProductNumber', $id)->first();
-
-    if(!$product) {
-      return response()->json([
-        'message' => 'Product not found'
-      ], 404);
+        return response()->json($categories->products, 200);
     }
+    protected function productsSingleOne($id)
+    {
+        $product = Product::where('ProductNumber', $id)->first();
 
-    return response()->json($product);
+        if (!$product) {
+            return response()->json([
+                'message' => 'Product not found'
+            ], 404);
+        }
 
-}
+        return response()->json($product);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -78,13 +68,12 @@ protected function productsSingleOne($id){
      */
     public function show($id)
     {
-        $productsByCategories = Product::where('CategoryID','=',$id)->get();
+        $productsByCategories = Product::where('CategoryID', '=', $id)->get();
 
         if ($productsByCategories == null)
             return response()->json(['message' => 'No item found.'], 404);
 
         return response()->json($productsByCategories);
-
     }
 
     /**
@@ -103,7 +92,7 @@ protected function productsSingleOne($id){
         if (Auth::user()->role != 1) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
-        $deleteProduct = Product::where('ProductNumber','=', $id)->delete();
+        $deleteProduct = Product::where('ProductNumber', '=', $id)->delete();
 
         if (!$deleteProduct) {
             return response()->json(['message' => 'Product not found'], 404);
@@ -111,6 +100,4 @@ protected function productsSingleOne($id){
 
         return response()->json(['message' => 'Product deleted']);
     }
-
-
 }
