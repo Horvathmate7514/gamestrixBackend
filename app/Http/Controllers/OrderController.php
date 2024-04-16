@@ -27,10 +27,11 @@ class OrderController extends Controller
             'OrderDate' => now(),
             'ShipDate' => now()->addDays(7),
             'CustomerID' => Auth::id(),
+            // 'Total' => OrderDetails::where('OrderNumber', $request->OrderNumber)->sum('QuotedPrice'),
+
+
         ]);
-
-        // return $request->all();
-
+        $order->Total=0;
         foreach ($request->all() as $product) {
 
             OrderDetails::create([
@@ -39,10 +40,14 @@ class OrderController extends Controller
                 'QuantityOrdered' => $product["QuantityOrdered"],
                 'QuotedPrice' => $product["QuotedPrice"],
             ]);
+            $order->Total += $product["QuotedPrice"];
         }
-
+        $order->save();
 
         return response()->json($order, 201);
+
+        // return $request->all();
+
     }
 
     /**
