@@ -81,7 +81,32 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+
+
+    }
+
+    public function updateProduct(Request $request, $id)
+    {
+        if (Auth::user()->role != 1) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        $product = Product::findOrFail($id);
+
+        $product->ProductName = $request->ProductName;
+        $product->ProductDescription = $request->ProductDescription;
+        $product->RetailPrice = $request->RetailPrice;
+        $product->QuantityOnHand = $request->QuantityOnHand;
+        $product->CategoryID = $request->CategoryID;
+        $product->Image = $request->Image;
+
+        $product->save();
+
+        return response()->json([
+            'message' => 'Product updated successfully',
+            'product' => $product
+        ], 200);
+
     }
 
     /**
