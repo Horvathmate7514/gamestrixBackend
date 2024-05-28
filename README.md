@@ -1,1 +1,1 @@
-asd com
+https://bgs.jedlik.eu/gamestrix/gamestrix/docs/api#/operations/categories.index
